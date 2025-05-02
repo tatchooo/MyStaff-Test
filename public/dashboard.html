@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #333;
+      margin-top: 30px;
+    }
+    .user-info {
+      text-align: center;
+      margin: 20px;
+    }
+    .user-info img {
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+    .chat-container {
+      width: 100%;
+      height: 80vh;
+      margin-top: 30px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 700px;
+      border: none;
+    }
+    .footer {
+      background-color: #4285F4;
+      color: white;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
+      position: relative;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Welcome to Your Dashboard!</h2>
+
+  <div class="user-info">
+    <script>
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        document.write(`<p>Hello, ${user.name} (${user.email})</p><img src="${user.photo}" width="100" />`);
+      } else {
+        window.location.href = "index.html"; // redirect back if not signed in
+      }
+    </script>
+  </div>
+
+  <!-- Embed Dify Chatflow -->
+  <div class="chat-container">
+    <iframe
+      src="https://aibot.cloudstaff.io/chatbot/FfGRqBWYjqwBMhfK"
+      frameborder="0"
+      allow="microphone">
+    </iframe>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 Dify. All Rights Reserved.</p>
+  </div>
+</body>
+</html>

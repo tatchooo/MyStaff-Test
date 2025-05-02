@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Firebase Google Sign-In</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #357ae8;
+    }
+    p {
+      color: #555;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Google Sign-In Demo</h1>
+    <button id="googleSignIn">Sign in with Google</button>
+    <p id="userInfo"></p>
+  </div>
+
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyC-V-43QL1lkj38936Bk2pN5-L9QGZYq1A",
+      authDomain: "dify-mystaff.firebaseapp.com",
+      projectId: "dify-mystaff",
+      storageBucket: "dify-mystaff.firebasestorage.app",
+      messagingSenderId: "142159250388",
+      appId: "1:142159250388:web:aa71515de92d74fad10c41"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Sign in on button click
+    document.getElementById("googleSignIn").addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          // Optional: Store user info in localStorage or sessionStorage
+          localStorage.setItem("user", JSON.stringify({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL
+          }));
+          // Redirect to another page
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Login failed: " + error.message);
+        });
+    });
+  </script>
+</body>
+</html>
