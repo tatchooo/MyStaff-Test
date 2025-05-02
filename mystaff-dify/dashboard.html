@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+</head>
+<body>
+  <h2>Welcome!</h2>
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      document.write(`<p>Hello, ${user.name} (${user.email})</p><img src="${user.photo}" width="100"/>`);
+    } else {
+      window.location.href = "index.html"; // redirect back if not signed in
+    }
+  </script>
+</body>
+</html>
